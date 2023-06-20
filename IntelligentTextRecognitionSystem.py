@@ -1,18 +1,18 @@
 import cv2
 import pytesseract
 
+
+
+
+
 def save_textInFile(image_path, text):
     with open(image_path.split('.')[0] + '.txt', 'w') as f:
         f.write(text)
 
 
-def detect_text(image_path):
+def detect_text(image_path, gray):
     # Загрузка изображения
     image = cv2.imread(image_path)
-
-    # преобразуем изображение в оттенки серого
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
     #Распознавание границ
     edges = cv2.Canny(gray, 30, 150)
 
@@ -43,30 +43,27 @@ def enhance_text(image_path):
     
     return dilate
 
-def recognize_text(image_path, language):
-    # Загрузка изображения
-    image = cv2.imread(image_path)
+def recognize_text(image_path, traindedModelsPath, language):
 
-    # Преобразование изображения в оттенки серого
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-    # Применение метода бинаризации для повышения контраста текста
-    _, binary = cv2.threshold(gray, 150, 255, cv2.THRESH_BINARY)
+    enhance_result = enhance_text(image_path)
+
+    cv2.imshow('Detected Text', detect_text(image_path, enhance_result))
+    cv2.imshow('Enhanced Text', enhance_text(image_path))
 
     # Применение OCR для распознавания текста
-    config = f"--oem 1 --psm 3 -l {language} --tessdata-dir tessdata"
-    text = pytesseract.image_to_string(binary, config=config)
+    config = f"--oem 1 --psm 3 -l {language} --tessdata-dir {traindedModelsPath}"
+    text = pytesseract.image_to_string(enhance_result, config=config)
 
     # Вывод распознанного текста
     print(text)
 
     #Сохранение результата в файл
     save_textInFile(image_path, text)
+    cv2.waitKey(0)
 
-# Пример использования
-image_path = "0000.png"
 
-recognize_text(image_path, "rus+eng")
-cv2.imshow('Detected Text', detect_text(image_path))
-cv2.imshow('Enhanced Text', enhance_text(image_path))
-cv2.waitKey(0)
+image_path = "1.png"
+traindedModelsPath = 'tessdata'
+
+recognize_text(image_path, traindedModelsPath, "rus+eng")

@@ -1,0 +1,15 @@
+MANJARO
+EMPOWERING
+DEVICES AND USERS
+
+Manjaro is a free and open source Linux operating
+system that emphasizes user privacy and control of
+their hardware. It is user-friendly and suitable for
+those new to computers, and can be installed on a
+wide range of devices. Architectures supported
+include x86-64 and ARM, making it a great choice
+for any device or computing environment. Manjaro
+provides numerous customization options and
+applications, as well as security and privacy
+features. It also offers several graphical user
+interfaces.

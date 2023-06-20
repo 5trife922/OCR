@@ -1,0 +1,31 @@
+Flutter - How to download a file from server using binary stream
+i stackoverflow.com › flutter-how-to-download-a-file-from-server-using-binary-stre
+
+вопрос [EAN
+
+Ещё 1 ответ
+
+1 was able to da this successfully with this code
+
+veld getInage(String url, String userId, sessionToken) async(
+var uri = Uri.parse(url);
+Map body = { Session’: sessionToken, 'Jserld': userId);
+try (
+Final response = await htcp.post(uri,
+headers: {'Cante-t-Tyae*: "application/json’},
+body: utfs. encode json. encode (body);
+if (response. contentlengtn == £){
+return;
+bi
+Directory tempdir = await getTemporarydirestory();
+String tempPatn = tempDir.path:
+File file = new File{'3tempPatn/fuserTd. ng’):
+await Tile.uriteAstytes(response.bodyBytes);
+displayInage( File);
+3
+cacen (value) {
+print (value);
+3
+3
+
+Thanks for the help)
